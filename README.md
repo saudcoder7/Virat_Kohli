@@ -200,6 +200,7 @@ Distributed under the MIT License for the **codebase only**. See [`LICENSE`](./L
 
 <div align="center">
 
-Made with ❤️ by a Virat Kohli fan, for Virat Kohli fans.
+Made by saudcoder7, for Virat Kohli fans.
+linkedin https://www.linkedin.com/in/saood-faisal-259b40316/
 
 </div>
