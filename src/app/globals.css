@@ -1,0 +1,501 @@
+@import "tailwindcss";
+
+/* ============================================================================
+   KING KOHLI: The Journey — Design System (Light Theme)
+   Clean, premium product-site aesthetic with warm accents
+   ============================================================================ */
+
+:root {
+  /* Core palette — light */
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f5f5f5;
+  --color-bg-tertiary: #efefef;
+  --color-bg-card: #ffffff;
+
+  /* Accent */
+  --color-accent: #b8860b;
+  --color-accent-light: #d4a843;
+  --color-accent-dim: rgba(184, 134, 11, 0.12);
+  --color-accent-red: #c0392b;
+
+  /* Text */
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #6b7280;
+  --color-text-muted: #9ca3af;
+
+  /* Borders & shadows */
+  --color-border: #e5e7eb;
+  --color-border-light: #f0f0f0;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 16px rgba(0, 0, 0, 0.08);
+
+  /* Solemn palette (father's passing section) */
+  --color-solemn-bg: #f9f9f9;
+  --color-solemn-text: #6b7280;
+  --color-solemn-accent: #9ca3af;
+
+  /* Spacing */
+  --section-padding: clamp(4rem, 8vw, 8rem);
+  --content-max-width: 1100px;
+
+  /* Transitions */
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Glass nav — specular sheen position (driven by JS scroll) */
+  --glass-sheen-x: 120%;
+}
+
+/* Tailwind v4 theme tokens */
+@theme inline {
+  --color-background: var(--color-bg-primary);
+  --color-foreground: var(--color-text-primary);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-bebas-neue);
+}
+
+/* ============================================================================
+   Base Styles
+   ============================================================================ */
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-primary);
+}
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* Custom scrollbar — subtle on light theme */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================================
+   Keyframes
+   ============================================================================ */
+
+/* Typewriter cursor blink */
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Fade in up — for scroll reveals */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Subtle float — for particles / decorative */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+/* Shimmer — for loading states */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Ken Burns settle — image zoom that eases to rest */
+@keyframes ken-burns-settle {
+  from {
+    transform: scale(1.08);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* ============================================================================
+   Utility Classes
+   ============================================================================ */
+
+.section-container {
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+  padding: var(--section-padding) 1.5rem;
+}
+
+/* Full-bleed breakout — allows a child inside .section-container to span full viewport */
+.full-bleed {
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.gradient-text-accent {
+  background: linear-gradient(
+    135deg,
+    var(--color-text-primary) 0%,
+    var(--color-accent) 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.link-hover {
+  opacity: 1;
+  transition: opacity 0.2s ease;
+}
+
+.link-hover:hover {
+  opacity: 0.6;
+}
+
+/* Typewriter cursor */
+.typewriter-cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1em;
+  background-color: var(--color-text-primary);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s step-end infinite;
+}
+
+/* Media placeholder slot */
+.media-placeholder {
+  background: var(--color-bg-secondary);
+  border: 2px dashed var(--color-border);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 16 / 9;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease;
+}
+
+.media-placeholder:hover {
+  border-color: var(--color-accent-dim);
+}
+
+/* ============================================================================
+   Editorial Moment Blocks
+   ============================================================================ */
+
+.editorial-moment {
+  position: relative;
+  overflow: hidden;
+}
+
+.editorial-moment-image {
+  overflow: hidden;
+  border-radius: 0.5rem;
+}
+
+.editorial-moment-image img,
+.editorial-moment-image iframe {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gradient scrim for overlaid text on full-bleed images */
+.editorial-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.72) 0%,
+    rgba(0, 0, 0, 0.35) 40%,
+    rgba(0, 0, 0, 0.08) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Large placeholder for editorial moments */
+.editorial-placeholder {
+  background: var(--color-bg-secondary);
+  border: 2px dashed var(--color-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition: border-color 0.3s ease;
+  min-height: 300px;
+}
+
+.editorial-placeholder:hover {
+  border-color: var(--color-accent-dim);
+}
+
+/* ============================================================================
+   Liquid Glass Nav
+   ============================================================================ */
+
+.glass-nav {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Specular sheen — subtle diagonal highlight that shifts on scroll */
+.glass-nav::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    120deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0) calc(var(--glass-sheen-x) - 20%),
+    rgba(255, 255, 255, 0.12) var(--glass-sheen-x),
+    rgba(255, 255, 255, 0) calc(var(--glass-sheen-x) + 20%),
+    transparent 100%
+  );
+  pointer-events: none;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+/* ============================================================================
+   Photo Strip
+   ============================================================================ */
+
+.photo-strip {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 0.5rem;
+  scrollbar-width: none;
+}
+
+.photo-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.photo-strip-thumb {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.photo-strip-thumb:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* ============================================================================
+   Gallery Masonry Grid
+   ============================================================================ */
+
+.gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 1rem;
+}
+
+.gallery-masonry .gallery-item-lg {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+.gallery-masonry .gallery-item-md {
+  grid-column: span 1;
+  grid-row: span 2;
+}
+
+.gallery-masonry .gallery-item-sm {
+  grid-column: span 1;
+  grid-row: span 1;
+}
+
+@media (max-width: 768px) {
+  .gallery-masonry {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 160px;
+  }
+
+  .gallery-masonry .gallery-item-lg {
+    grid-column: span 2;
+    grid-row: span 1;
+  }
+
+  .gallery-masonry .gallery-item-md {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+}
+
+/* ============================================================================
+   YouTube Background Embed Container
+   ============================================================================ */
+
+.yt-bg-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Scale up to crop YouTube chrome (logo, title overlay, etc.) */
+.yt-bg-container iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 110%;
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   Hero Full-Viewport Video Embed
+   ============================================================================ */
+
+.hero-video-container {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+/* Scale up aggressively to crop YouTube chrome and fill viewport */
+.hero-video-iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  /* 16:9 fill — overscale to cover any viewport ratio */
+  width: max(177.78vh, 100vw);
+  height: max(56.25vw, 100vh);
+  transform: translate(-50%, -50%);
+  border: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+   Hero Unmute Button
+   ============================================================================ */
+
+.hero-unmute-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  padding: 8px 14px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(13, 20, 36, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  pointer-events: auto;
+}
+
+.hero-unmute-btn:hover {
+  background: rgba(13, 20, 36, 0.9);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.hero-unmute-btn:active {
+  transform: scale(0.97);
+}
+
+/* ============================================================================
+   Reduced Motion Overrides
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .typewriter-cursor {
+    animation: none !important;
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+   Responsive helpers
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: clamp(2.5rem, 6vw, 4rem);
+  }
+}
