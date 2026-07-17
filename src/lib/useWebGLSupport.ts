@@ -8,7 +8,9 @@ import { useState, useEffect } from "react";
  * Falls back to false for low-end devices.
  */
 export function useWebGLSupport(): boolean {
-  const [supported, setSupported] = useState(true);
+  // Start as false — safe default, upgrades to true after client-side WebGL check.
+  // This prevents Three.js from attempting to initialize before the browser confirms GPU support.
+  const [supported, setSupported] = useState(false);
 
   useEffect(() => {
     try {
